@@ -4,14 +4,14 @@
 # this function guesses the users number based on its hash
 guess_function () {
 
-secrethash=$(echo $secret | md5sum)
+secrethash=$(echo $secret | sha256sum)
 echo "secret hash is:" $secrethash
 
 #start brute force guessing the secret at 0
 guess=0
 
 # run a hash on guess call it guesshash
-guesshash=$(echo $guess | md5sum)
+guesshash=$(echo $guess | sha256sum)
 
 # loop while guesshash is not equal to secrethash
 while [ "$guesshash" != "$secrethash" ]
@@ -20,7 +20,7 @@ do
 	echo "guess " $guess " " $guesshash
 
 	guess=$((guess+1))
-	guesshash=$(echo $guess | md5sum)
+	guesshash=$(echo $guess | sha256sum)
 done
 	echo "guess " $guess " " $guesshash
 	echo "The secret is " $guess
